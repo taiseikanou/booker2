@@ -1,7 +1,17 @@
 class UsersController < ApplicationController
-  def edit
+  def show
+
   end
 
-  def show
+
+
+  def index
+    @users = User.all
+  end
+
+private
+
+  def user_params
+  params.require(:user).permit(:name,:image)
   end
 end
