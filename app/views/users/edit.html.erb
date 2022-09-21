@@ -2,10 +2,11 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2 class="mt-3">User info</h2>
-      <%= form_with model: @user do|f| %>
+      <%= form_with model: @user, url: user_path(@user.id), method: :patch do|f| %>
+
         <div class="form-group">
           <label for="book_title">Title</label>
-          <%= f.text_field :book_name, class:"form-control" %>
+          <%= f.text_field :name, class:"form-control" %>
         </div>
         <div class="form_group">
           <label for="image">image</label>
@@ -13,7 +14,7 @@
         </div>
         <div class="form-group">
            <label for="book_opinion">introduction</label>
-           <%= f.text_area :opinion, class:"form-control", rows:"3" %>
+           <%= f.text_area :introduction, class:"form-control", rows:"3" %>
         </div>
         <div class="form-group">
            <%= f.submit 'creat book', class:"btn-success btn-info mt-4" %>
