@@ -3,9 +3,21 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
          has_many :books, dependent: :destroy
          has_one_attached :image
+         validates :name, presence: true, uniqueness: true
+         validates :name, length: { minimum: 2 ,
+         too_short: "Name is too short (minimum is 2 characters)"}
+
+         validates :name, length: { maximum: 20,
+         too_long: "Body is too long (maximum is 20 characters)" }
+         validates :introduction, length: { maximum: 50,
+         too_long: "Body is too long (maximum is 50 characters)" }
+         has_one_attached :profile_image
+
+
+
+
 
   def get_profile_image(width,height)
     unless image.attached?

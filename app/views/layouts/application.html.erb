@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <script src="https://kit.fontawesome.com/77dd988db0.js" crossorigin="anonymous"></script>
   <head>
     <title>Bookers2</title>
@@ -12,13 +11,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
- <body class="d-flex flex-column vh-100">
-    <header　class="shadow-sm">
-   <div class="p-3 mb-2 bg-dark text-white">
-    <header class="shadow-sm">
+  <body>
+    <header>
+     <div class="bg-dark text-white">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <h1 class="navbar-brand p-3 text-light",  href="/">Bookers</h1>
+          <h1><%= link_to "Bookers",root_path,class: "navbar-brand p-3 text-light"%></h1>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,38 +27,47 @@
     <% if user_signed_in? %>
 
        <li>
-        <i class="fa-solid fa-house"></i>
-        <%= link_to "Home", user_path(current_user.id),class: 'text-light m-1' %>
+        <%= link_to user_path(current_user.id),class: "text-light m-1" do %>
+        <i class="fas fa-home"></i>Home
+        <% end %>
       </li>
       <li>
-        <i class="fas fa-users"></i>
-        <%= link_to "Users", users_path,class: 'text-light m-1' %>
+        <%= link_to users_path,class: "text-light m-1" do%>
+        <i class="fas fa-users"></i>Users
+        <% end %>
       </li>
       <li>
-        <i class="fas fa-book"></i>
-        <%= link_to "Books", books_path,class: 'text-light m-1' %>
+        <%= link_to books_path,class: "text-light m-1" do%>
+        <i class="fas fa-book-open"></i>Books
+        <% end %>
       </li>
       <li>
-        <i class="fas fa-sign-out-alt"></i>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'text-light m-1' %>
+        <%= link_to destroy_user_session_path, method: :delete do%>
+        <i class="fas fa-sign-out-alt"></i>Log out
+        <% end %>
       </li>
     <% else %>
-      <li>
-        <i class="fa-solid fa-house"></i>
-        <%= link_to "Home", root_path,class: 'text-light m-1' %>
+    <li>
+        <%= link_to root_path,class: "text-light m-1" do%>
+        <i class="fas fa-home"></i>Home
+        <% end %>
       </li>
       <li>
-        <i class="fas fa-link"></i>
-        <%= link_to "About" , about_path,class: 'text-light m-1' %>
+        <%= link_to about_path,class: "text-light m-1" do%>
+        <i class="fas fa-link"></i>About
+        <% end %>
       </li>
       <li>
-        <i class="fas fa-user-plus"></i>
-        <%= link_to "Sign up", new_user_registration_path,class: 'text-light m-1' %>
+        <%= link_to new_user_registration_path,class: "text-light m-1" do%>
+        <i class="fas fa-user-plus"></i>Sign up
+        <% end %>
       </li>
       <li>
-       <i class="fas fa-sign-in-alt"></i>
-        <%= link_to "Log in", new_user_session_path,class: 'text-light m-1' %>
-      </li>
+        <%= link_to new_user_session_path,class: "text-light m-1" do%>
+        <i class="fas fa-sign-in-alt"></i>Log in
+        <% end %>
+        </li>
+
     <% end %>
     </ul>
       </div>
@@ -69,17 +76,19 @@
   </div>
   </div>
 </header>
-    <%= yield %>
-    <footer class="text-center">
-    <p class="text-center">CopyRight Infratop.inc</p>
-    </div>
+<%= flash[:notice] %>
+<%= yield %>
+    <footer>
+      <div class="container mt-5">
+  	    <div class="row">
+    	    <div class="mx-auto">
+    		    <p>CopyRight Infratop.inc</p>
+    	    </div>
+        </div>
+      </div>
     </footer>
+  </body>
 </html>
-
-
-
-
-
 
 
 

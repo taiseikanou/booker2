@@ -1,25 +1,36 @@
+<%= flash[:hoge] %>
+<%= flash[:success] %>
 
 <main>
-  <%= render 'books', books: [@book,@user] %>
-  <div class="col-md-8 offset-md-1">
+  <p id="notice"></p>
+        <%= render 'books', books: [@book,@user,@book_show] %>
+        <div class="col-md-8 offset-md-1">
+          <h2>Book detail</h2>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                  <%= link_to user_path(@book_show.user.id) do %>
+                  <%= image_tag @book_show.user.get_profile_image(80,80) %>
+                  <p>
+                   <%= @book_show.user.name %>
+                   <% end %>
+                  </p>
+                </td>
+                <td><%= link_to  book_path(@book_show.id) do %>
+                      <%= @book_show.title%>
+                    <% end %>
+                </td>
+                <td><%= @book_show.body %></td>
+                <% if @book_show.user == current_user %>
+                  <td><%= link_to 'Edit', edit_book_path(@book_show.id)%></td>
+                  <td><%=link_to 'Destroy',book_path(@book_show.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
+                <% end %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
 
-  <h2>Book detail</h2>
-
-  <table class="table">
-    <tbody>
-  <tr>
-  <td><%= @book_show.title %></td>
-  <td><%= @book_show.body %></td>
-  <td><%= link_to 'Edit', edit_book_path(@book_show.id)%></td>
-  <td><%=link_to 'Destroy',book_path(@book_show.id), method: :delete, "data-confirm"=>"Are you sure?" %></td>
-  </tr>
-
-  </table>
-
-</tbody>
-</table>
-</div>
 </main>
-
-
-
