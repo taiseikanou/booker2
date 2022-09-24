@@ -1,16 +1,15 @@
-
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2 class="mt-3">Editing Book</h2>
       <% if @book.errors.any? %>
-  <h2><%= @book.errors.count %>error prohibited this obj from being saved:</h2>
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+        <h2><%= @book.errors.count %>error prohibited this obj from being saved:</h2>
+        <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+        <% end %>
      <%= form_with model: @book, url: book_path(@book.id), method: :patch do|f| %>
         <div class="form-group">
           <label for="book_title">Title</label>

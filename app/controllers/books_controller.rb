@@ -40,15 +40,21 @@ class BooksController < ApplicationController
     @book = Book.new
     @books = Book.all
     @user = current_user
+ 
   end
 
   def edit
     @book = Book.find(params[:id])
+    if @book.user == current_user
+      render :edit
+    else
+      redirect_to books_path
+    end
   end
 
   private
 
   def book_params
-    params.require(:book).permit(:title , :body )
+    params.require(:book).permit(:title , :body ,:user_id)
   end
 end
