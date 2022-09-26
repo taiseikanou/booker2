@@ -8,10 +8,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if@user.update(user_params)
-    redirect_to user_path(current_user.id)
+      redirect_to user_path(current_user.id)
     flash[:hoge] = "You have updated user successfully."
     else
-    render :edit
+      render :edit
     end
   end
 
@@ -33,6 +33,6 @@ class UsersController < ApplicationController
 private
 
   def user_params
-  params.require(:user).permit(:name,:image,:introduction, :profile_image)
+    params.require(:user).permit(:name,:image,:introduction, :profile_image)
   end
 end
