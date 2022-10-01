@@ -28,7 +28,9 @@
                   <% end %>
                 </td>
                 <td><%= book.body %></td>
+                <td><p>コメント件数：<%= @book_show.book_comments.count %></p></td>
               </tr>
+
             <% end %>
             </tbody>
           </table>
