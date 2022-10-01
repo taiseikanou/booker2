@@ -8,6 +8,14 @@
         <%= render 'books', {books: @book,user: @user} %>
         <div class="col-md-8 offset-md-1">
           <h2>Book detail</h2>
+           <% if @book_comment.errors.any? %>
+      <h3><%= @book_comment.errors.count %>errors prohibited this obj from being saved:</h3>
+      <ul>
+      <% @book_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+     </ul>
+    <% end %>
           <table class="table">
             <tbody>
               <tr>
@@ -41,7 +49,9 @@
               <p><%= image_tag book_comment.user.get_profile_image(80,80) %>
                  <%= book_comment.comment %>
                  <% if book_comment.user == current_user %>
-                   <%= link_to "削除", book_book_comment_path(book_comment.book, book_comment), method: :delete %>
+                   <%=link_to book_book_comment_path(book_comment.book, book_comment),class:"btn btn-sm btn-danger ", method: :delete, "data-confirm"=>"Are you sure?" do%>
+                  Destroy
+                  <% end %>
                  <% end %>
               </p>
               <%= book_comment.user.name %>
@@ -49,8 +59,8 @@
           </div>
           <div>
             <%= form_with model: [@book_show, @book_comment] do |f| %>
-              <%= f.text_area :comment,:size=>"70x10", placeholder: "コメントをここに",class:"mb-2" %>
-              <p><%= f.submit "送信する" %></p>
+              <%= f.text_area :comment,:size=>"85x5", placeholder: "コメントをここに",class:"mb-2" %>
+              <p><%= f.submit "送信" %></p>
             <% end %>
           </div>
         </div>
