@@ -9,39 +9,39 @@
       <tr>
 	      <th>introduction</th>
 	      <th><%=user.introduction  %></th>
-       </tr>
-       <tr>
-         <th>follews</th>
-         <th>
-           <%= link_to user_followings_path(user),class: do%>
-           <%= user.followings.count %>
-           <% end %>
-           </th>
-       </tr>
-       <tr>
-         <th>followers</th>
-         <th>
-           <%= link_to user_followers_path(user),class:  do%>
-           <%= user.followers.count %>
-           <% end %>
-          </th>
-       </tr>
+      </tr>
+      <tr>
+        <th>follews</th>
+        <th>
+          <%= link_to user_followings_path(user),class: do%>
+            <%= user.followings.count %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <th>followers</th>
+        <th>
+          <%= link_to user_followers_path(user),class:  do%>
+            <%= user.followers.count %>
+          <% end %>
+        </th>
+      </tr>
     </tbody>
   </table>
   <% if user == current_user %>
-  <%= link_to edit_user_path(user.id),class: "btn btn-outline-secondary btn-block"  do %>
-    <i class="fas fa-user-cog"></i>
+    <%= link_to edit_user_path(user.id),class: "btn btn-outline-secondary btn-block"  do %>
+      <i class="fas fa-user-cog"></i>
     <% end %>
   <% else %>
-      <% if current_user.following?(user) %>
-  <%= link_to user_relationships_path(user.id), method: :delete,class:"btn-info btn-lg mt-4" do %>
-    フォロー外す
+    <% if current_user.following?(user) %>
+      <%= link_to user_relationships_path(user.id), method: :delete,class:"btn-info btn-lg mt-4" do %>
+      フォロー外す
+      <% end %>
+    <% else %>
+      <%= link_to user_relationships_path(user.id), method: :post, class:"btn-success btn-lg mt-4" do %>
+      フォローする
+    <% end %>
   <% end %>
-<% else %>
-  <%= link_to user_relationships_path(user.id), method: :post, class:"btn-success btn-lg mt-4" do %>
-  フォローする
-  <% end %>
-<% end %>
   <% end %>
   <%= form_with model: books do|f| %>
     <h2 class="mt-3">New book</h2>
