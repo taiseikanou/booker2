@@ -5,7 +5,7 @@
   <div class="container px-5 px-sm-0">
     <div class="row">
       <div class="col-md-3">
-        <%= render 'books', {books: @book,user: @user} %>
+        <%= render 'books', {book: Book.new ,user: @user} %>
         <div class="col-md-8 offset-md-1">
           <h2>Book detail</h2>
            <% if @book_comment.errors.any? %>
@@ -20,48 +20,31 @@
             <tbody>
               <tr>
                 <td>
-                  <%= link_to user_path(@book_show.user.id) do %>
-                    <%= image_tag @book_show.user.get_profile_image(80,80) %>
+                  <%= link_to user_path(@book.user.id) do %>
+                    <%= image_tag @book.user.get_profile_image(80,80) %>
                     <p>
-                      <%= @book_show.user.name %>
+                      <%= @book.user.name %>
                     </p>
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to  book_path(@book_show.id) do %>
-                    <%= @book_show.title%>
+                  <%= link_to  book_path(@book.id) do %>
+                    <%= @book.title%>
                   <% end %>
                 </td>
-                  <td><%= @book_show.body %></td>
+                  <td><%= @book.body %></td>
                 </td>
                 <td>
-                 <p>コメント件数：<%= @book_show.book_comments.count %></p>
+                 <p>コメント件数：<%= @book.book_comments.count %></p>
                 </td>
-
+                <td class="favorite-btn">
+                 <%= render 'favorites/favorite', book: @book %>
                 <td>
-                  <%= render 'favorite', book_show: @book_show %>
-                </td>
               </tr>
             </tbody>
           </table>
-          <div>
-            <% @book_show.book_comments.each do |book_comment| %>
-              <p><%= image_tag book_comment.user.get_profile_image(80,80) %>
-                 <%= book_comment.comment %>
-                 <% if book_comment.user == current_user %>
-                   <%=link_to book_book_comment_path(book_comment.book, book_comment),class:"btn btn-sm btn-danger ", method: :delete, "data-confirm"=>"Are you sure?" do%>
-                  Destroy
-                  <% end %>
-                 <% end %>
-              </p>
-              <%= book_comment.user.name %>
-            <% end %>
-          </div>
-          <div>
-            <%= form_with model: [@book_show, @book_comment] do |f| %>
-              <%= f.text_area :comment,:size=>"85x5", placeholder: "コメントをここに",class:"mb-2" %>
-              <p><%= f.submit "送信" %></p>
-            <% end %>
+          <div class="book_comment_btn">
+          <%= render 'book_comments/book_comment',book: @book,book_comment: @book_comment %>
           </div>
         </div>
       </div>
