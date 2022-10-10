@@ -15,8 +15,7 @@ Rails.application.routes.draw do
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/search', to: 'searches#search'
-  resources :users, only: [:show,:edit,:update]
-  resources :messages, only: [:create]
-  resources :rooms, only: [:create,:show]
+
+  resources :chats, only: [:show, :create]
 end
 

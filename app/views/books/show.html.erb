@@ -37,5 +37,8 @@
       <%= render "book_comments/form", book: @book, book_comment: @book_comment %>
 
     </div>
+    <div>
+      <p class="view-count">👀数: <%= @book_detail.view_counts.count %></p>
+    </div>
   </div>
 </div>
